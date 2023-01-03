@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "OnTotemPopMixin"
+    "OnTotemPopMixin",
+    "ServerOptOut"
   ],
   "injectors": {
     "defaultRequire": 1
