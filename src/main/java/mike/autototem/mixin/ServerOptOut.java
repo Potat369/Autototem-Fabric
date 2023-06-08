@@ -13,12 +13,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class ServerOptOut {
-    @Inject(at=@At("TAIL"), method="onGameJoin")
+    @Inject(at = @At("TAIL"), method = "onGameJoin")
     private void sendInfoPackage(GameJoinS2CPacket packet, CallbackInfo ci) {
         ClientPlayNetworkHandler networkHandler = (ClientPlayNetworkHandler) ((Object) this);
         networkHandler.sendPacket(new CustomPayloadC2SPacket(Identifier.of("autototem", ""),
                 new PacketByteBuf(Unpooled.buffer())
-                        .writeString("Client uses the Autototem mod.")
-        ));
+                        .writeString("Client uses the Autototem mod.")));
     }
 }

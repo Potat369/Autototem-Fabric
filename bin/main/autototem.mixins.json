@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "mike.autototem.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "OnTotemPopMixin",
+    "ServerOptOut"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
