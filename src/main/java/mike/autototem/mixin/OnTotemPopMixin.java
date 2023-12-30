@@ -44,7 +44,9 @@ public class OnTotemPopMixin {
             return;
 
         GameRenderer gameRenderer = (GameRenderer) ((Object) this);
-        PlayerEntity player = gameRenderer.getClient().player;
+        MinecraftClient client = gameRenderer.getClient();
+        
+        PlayerEntity player = client.player;
         if (player == null)
             return;
 

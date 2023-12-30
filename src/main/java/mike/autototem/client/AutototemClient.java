@@ -7,6 +7,5 @@ import net.fabricmc.api.Environment;
 @Environment(EnvType.CLIENT)
 public class AutototemClient implements ClientModInitializer {
     @Override
-    public void onInitializeClient() {
-    }
+    public void onInitializeClient() { }
 }
