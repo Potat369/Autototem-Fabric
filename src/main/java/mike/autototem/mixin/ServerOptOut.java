@@ -19,7 +19,7 @@ public class ServerOptOut {
         networkHandler.sendPacket(
             new CustomPayloadC2SPacket(
                 new PacketByteBuf(Unpooled.buffer())
-                    .writeString("Client uses the Autototem mod.")
+                    .writeString("client_uses_the_autototem_mod.")
             )
         );
     }
