@@ -1,6 +1,8 @@
 package mike.autototem.mixin;
 
+import mike.autototem.client.AutototemClient;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientCommonNetworkHandler;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.effect.StatusEffects;
@@ -15,6 +17,7 @@ import net.minecraft.network.packet.c2s.play.UpdateSelectedSlotC2SPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,7 +25,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 
 @Mixin(GameRenderer.class)
-public class OnTotemPopMixin {
+public class OnTotemPopMixin  {
+    @Shadow
+    public MinecraftClient getClient() { return null; }
+
     private ArrayList<Packet<?>> packetsToSend = new ArrayList<>();
 
     @Inject(at = @At("TAIL"), method = "tick")
@@ -40,11 +46,13 @@ public class OnTotemPopMixin {
 
     @Inject(at = @At("TAIL"), method = "showFloatingItem")
     private void onTotemUse(ItemStack floatingItem, CallbackInfo ci) {
+        if (!AutototemClient.totemEnabled)
+            return;
+
         if (!floatingItem.isOf(Items.TOTEM_OF_UNDYING))
             return;
 
-        GameRenderer gameRenderer = (GameRenderer) ((Object) this);
-        MinecraftClient client = gameRenderer.getClient();
+        MinecraftClient client = getClient();
         
         PlayerEntity player = client.player;
         if (player == null)
