@@ -19,7 +19,7 @@ public class AutototemClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        totemKeyBind = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.autototem.toggle_mod", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_LEFT_BRACKET, KeyBinding.GAMEPLAY_CATEGORY));
+        totemKeyBind = new KeyBinding(null, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_K, null);
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (totemKeyBind.wasPressed()) {
